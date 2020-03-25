@@ -16,12 +16,13 @@ defmodule CWF.Parser do
 
         case var do
             true -> IO.inspect "<--- Panic Message Detected --->"
-                    Process.exit(self, :kill)
+                    Process.exit(self(), :kill)
                     
             _ -> value = parse(msg)
-                IO.inspect value , label: "<-- Json Format -->  "
+                GenServer.cast(Forecast,{:process, value["message"]})
+                # IO.inspect value , label: "<-- Json Format -->  "
         end
-        
+
         {:noreply, state}
     end
 
@@ -33,8 +34,8 @@ defmodule CWF.Parser do
     defp is_panic?(msg) do
         panic? = String.split(msg, ":") 
                  |> (Enum.at 1) 
-                    |> String.trim 
-                        |> String.starts_with? "panic"
+                    |> (String.trim )
+                        |> (String.starts_with? "panic")
  
         panic?
     end
