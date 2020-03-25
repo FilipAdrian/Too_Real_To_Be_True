@@ -5,10 +5,13 @@ defmodule CWF.Application do
   def start(_type, _args) do 
 
     children = [
+      {CWF.Parser, name: Parser},
       %{
         id: EventGet,
         start: {CWF.Event, :start_link, ["http://localhost:4000/iot"]}
-      }
+      },
+
+
     ]
 
     opts = [strategy: :one_for_one, name: __MODULE__]

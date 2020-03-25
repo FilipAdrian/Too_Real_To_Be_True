@@ -1,6 +1,7 @@
 defmodule CWF.Event do
     use GenServer
 
+    @impl true
     def init(state) do
         IO.inspect state.url
         EventsourceEx.new(state.url, stream_to: self())
@@ -14,7 +15,8 @@ defmodule CWF.Event do
 
     @impl true
     def handle_info(msg, state) do
-        IO.inspect msg.data
+        # IO.inspect msg.data
+        GenServer.cast(Parser,{:send, msg.data})
         {:noreply, state}
     end
 
