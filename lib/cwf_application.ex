@@ -5,7 +5,8 @@ defmodule CWF.Application do
   def start(_type, _args) do 
 
     children = [
-      {CWF.Parser, name: Parser},
+      # {CWF.Parser, name: Parser},
+      {DynamicSupervisor, name: CWF.DynParser, strategy: :one_for_one},
       %{
         id: EventGet,
         start: {CWF.Event, :start_link, ["http://localhost:4000/iot"]}

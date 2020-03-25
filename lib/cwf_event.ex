@@ -16,8 +16,17 @@ defmodule CWF.Event do
     @impl true
     def handle_info(msg, state) do
         # IO.inspect msg.data
-        GenServer.cast(Parser,{:send, msg.data})
+        send_msg_worker(msg)
+
         {:noreply, state}
     end
+
+    defp send_msg_worker( msg ) do
+        {:ok, pid} =  DynamicSupervisor.start_child(CWF.DynParser, CWF.Parser)
+        # ch_count = DynamicSupervisor.count_children(CWF.DynParser)
+        # IO.inspect ch_count
+        GenServer.cast(pid,{:send, msg.data})
+    end
+
 
 end
