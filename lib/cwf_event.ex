@@ -15,6 +15,7 @@ defmodule CWF.Event do
 
     @impl true
     def handle_info(msg, state) do
+
         send_msg_worker(msg)
 
         {:noreply, state}

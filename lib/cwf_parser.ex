@@ -20,7 +20,6 @@ defmodule CWF.Parser do
                     
             _ -> value = parse(msg)
                 GenServer.cast(Forecast,{:process, value["message"]})
-                # IO.inspect value , label: "<-- Json Format -->  "
         end
 
         {:noreply, state}

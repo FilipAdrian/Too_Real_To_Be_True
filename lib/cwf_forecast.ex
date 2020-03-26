@@ -1,8 +1,8 @@
 defmodule CWF.Forecast do
-    use GenServer, restart: :transient
+    use GenServer
 
     def start_link(state) do
-        GenServer.start_link(__MODULE__,[], state)
+        GenServer.start_link(__MODULE__, [], state)
     end
 
     @impl true
@@ -13,8 +13,7 @@ defmodule CWF.Forecast do
     @impl true
     def handle_cast( {:process,data}, state ) do
         data_set = process_data(data)
-        IO.inspect Map.to_list data_set
-        # IO.inspect state.lenght ,label: "<--- List SIZE --->  "
+        GenServer.call(Aggregator, {:print, data_set})
         {:noreply, state}
     end
 

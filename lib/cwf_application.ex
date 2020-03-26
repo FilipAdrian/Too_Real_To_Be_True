@@ -9,6 +9,9 @@ defmodule CWF.Application do
 
       {CWF.Forecast, name: Forecast},
 
+      {CWF.Aggregator, name: Aggregator},
+
+
       %{
         id: EventGet,
         start: {CWF.Event, :start_link, ["http://localhost:4000/iot"]}
