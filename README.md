@@ -1,7 +1,10 @@
 # COVID WEATHER FORECAST
+
 Because now it's a hard time, caused by *COVID-19* and all of us should stay at home, </b>
-A *SMART* social group decided to make an app all people, to inform about current wheather situation
+A *SMART* social group decided to make an app, to inform about current wheather situation
+
 ---
+
 ## WHY?
   * Why not ?
 ---
